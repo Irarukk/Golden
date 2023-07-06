@@ -1,0 +1,214 @@
+{% load static %} 
+
+<!DOCTYPE html>
+<head>
+  <title>GoldenGarden</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+  <link rel="stylesheet" href="{% static '1.Index.css'%}">
+  <link rel="shortcut icon" href="{% static 'images/logo.png' %}" />
+  <script src="https://kit.fontawesome.com/acbdc95a40.js" crossorigin="anonymous"></script>
+</head>
+<body >
+  <!-- !CHeckbox para responsive -->
+  <Header> 
+    <input type="checkbox" id="check" />
+      <label for="check" class="chekbtn">
+        <i class="fa fa-bars"></i>
+      </label>
+      <!-- !aqui comienza el codigo principal -->
+    <div class="sup">
+      <img class="logo" src="{% static 'images/logo_horizontal.png' %}"alt="logo">
+      <form class="search-box">
+        <input type="text" placeholder="BUSCAR ELEMENTO" >
+        <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+
+    </form>
+      <div class="sup-btn" id="user">
+        {% if user.is_authenticated %}
+          <div style="display: flex; margin: 0 100px; align-items: center;"> 
+          <span style="color: gold;margin-right: 40px; text-transform: capitalize; font-size: x-large; text-shadow: 0 0 7px black; " >{{user.username}}</span>
+          <li><a href="{% url 'logout' %}">Salir</a></li>
+        </div>
+        {% else %}
+          <li><a href="{% url 'login' %}">Ingresar</a></li>
+          <li><a href="{% url 'registro' %}">Registrar</a></li>
+          <li><a href="{% url 'perfil_cliente' %}">Perfil</a></li>
+        {% endif %}
+      </div>
+    </div>
+      <div class="inferior">
+        <li><i class="fa-solid fa-house"></i><a href="{% url 'home' %}">Inicio</a></li>
+        <li ><i class="fa-sharp fa-solid fa-leaf"></i><a href="#productos">Productos</a></li>
+        <li><i class="fa-solid fa-users"></i><a href="">Nosotros</a></li>
+        
+        <div class="carrito"  >
+          <li>
+          {% for item in carro %}
+            {% if not carro %}
+              <div style="display: none;" class="notif"></div>
+            {% else %}
+              <div style="display: block;" class="notif">{{item.4}}</div>
+            {% endif %}
+          {% endfor %}
+          <i class="fa-solid fa-cart-shopping"></i><a href="{% url 'carrito' %}">Mis Compras</a>
+        </li>
+        </div>
+        <li><i class="fa-solid fa-truck-fast"></i><a href="">Seguimiento</a></li>
+      </div>
+    <div class="cont-carrito"></div>
+    
+  </Header>
+  <Section>
+    <h2 class="sub-titulo"> Inicio</h2>
+    <!-- !INICIO BOOTSTRAP -->
+    <div class="carrusel">
+    <div id="carouselExampleCaptions" class="carousel slide">
+      <div class="carousel-indicators">
+        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+      </div>
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <img src="{% static 'images/Banner1.jpg' %}" class="d-block w-100" alt="Banner-1">
+          <div class="carousel-caption d-none d-md-block">
+            <h5>Los Mejores Productos</h5>
+            <p>Solo aqui encontraras lo que necesita tu jardin al mejor precio</p>
+          </div>
+        </div>
+        <div class="carousel-item">
+          <img src="{% static 'images/Banner2.jpg' %}" class="d-block w-100" alt="banner-2">
+          <div class="carousel-caption d-none d-md-block">
+            <h5>Ofertas siempre</h5>
+            <p>si te suscribes tendras grandes ofertas todos los dias</p>
+          </div>
+        </div>
+        <div class="carousel-item">
+          <img src="{% static 'images/Banner3.jpg' %}" class="d-block w-100" alt="banner-3">
+          <div class="carousel-caption d-none d-md-block">
+            <h5>Transforma tu jardín en un paraíso verde con nosotros</h5>
+            <p>estamos para ayudarte</p>
+          </div>
+        </div>
+      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
+  </div>
+    <!-- !FINBOOTSRAP -->
+
+    <H2 class="sub-titulo" id="productos">Productos</H2>
+
+    <!-- !PRODUCTOS -->
+  <div class="productos" >
+    {% for planta in plantas %}
+    <!-- !ITEM -->
+    <div class="item">
+      {% if planta.oferta %}
+        <div id="esconder" class="descuento"><p>{{planta.decto}}</p><p>%dto.</p></div>
+      {% else %}
+        <div id="esconder" style="display: none;" class="descuento"><p>{{planta.decto}}</p><p>%dto.</p></div>
+      {% endif %}
+      <div class="img-item"><img src="{{planta.imagen}}" alt="FOTO"></div>
+      <div class="info-item">
+        {% if planta.oferta %}
+        <div id="esconder"  class="precio-ant"><p>$</p><p>{{planta.tachado}}</p></div>
+        {% else %}
+        <div id="esconder" style="display: none;" class="precio-ant"><p>$</p><p>{{planta.tachado}}</p></div>
+        {% endif %}
+        <div class="precio"><h3>$</h3><h3>{{planta.precio}}</h3></div>
+          <h4 class="nom-item">{{planta.nombre}}</h4>
+          <div class="stock"><p>disponible: </p>&nbsp;<p >{{planta.stock}}</p></div>
+          <p class="descripcion">{{planta.detalle}}</p>
+      </div>
+      <a href="{% url 'addtocar' planta.codigo %}"><button  class="btn"><i class="fa-solid fa-bag-shopping"></i>&nbsp;&nbsp;Agregar</button></a>
+      
+    </div>
+    {% endfor %}
+
+    
+    
+  </div>
+  </Section>
+  <section>
+    <h2 style="margin:30px; color: white;">Nosotros</h2>
+    <p style=" margin: 30px; font-size: medium; color: white;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur autem, amet fuga eum dolores tempora dolor suscipit earum beatae? Mollitia, nostrum officiis? Tempore necessitatibus debitis vitae, optio id exercitationem rem.Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus officia laudantium atque eius omnis, facere vel harum doloremque, quos fuga autem corrupti itaque aperiam aliquid similique neque inventore nihil odit?</p>
+  </section>
+  <Footer>
+    <div class="contacto">
+      <i class="fa-solid fa-phone-volume"></i>
+      <div class="vent">
+        <h4>Para Consultas</h4>
+        <h2>(+569)1 234 5678</h2>
+      </div>
+    </div>
+    <div class="footer">
+      <div class="grupo-1">
+        <div class="conocenos">
+          <h2>Conócenos</h2>
+          <a href="">Nuestra Empresa</a>
+          <a href="">Politicas de Privacidad</a>
+          <a href="">Término y Condiciones</a>
+          <a href="">Trabaja con Nosotros</a>
+        </div>
+        <div class="ayuda"  >
+          <h2>Te Ayudamos</h2>
+          <a href="">Centro de Ayuda</a>
+          <a href="">Mis Compras</a>
+          <a href="">Documentacion</a>
+        </div>
+        <div class="direccion">
+          <h2>Encuéntranos</h2>
+          <h3>Casa Matriz</h3>
+          &nbsp;&nbsp;<i class="fa-solid fa-location-dot"></i>&nbsp;<a href=""
+            >Serrano #1105, Melipilla</a
+          >
+
+          &nbsp;
+          <h3>Otras Sucursales</h3>
+          &nbsp;&nbsp;<i class="fa-solid fa-shop"></i>&nbsp;<a href=""
+            >Ver Listado</a
+          >
+        </div>
+      </div>
+
+      <div class="grupo-2">
+        <div class="lg">
+          <img src="{% static 'images/logo_horizontal.png' %}" alt="Logo" />
+        </div>
+        <div class="siguenos">
+          <h3>Síguenos</h3>
+          <i class="fa-brands fa-facebook-f" ></i>
+          <i class="fa-brands fa-twitter"></i>
+          <i class="fa-brands fa-instagram"></i>
+          <i class="fa-brands fa-youtube"></i>
+          <i class="fa-brands fa-pinterest"></i>
+        </div>
+        <div class="copy">
+          <small
+            >&copy;
+            <script>
+              var fecha = new Date();
+              var anio = fecha.getFullYear();
+              document.write(anio);
+            </script>
+            <b>GoldenGarden</b> - Todos los Derechos Reservados.</small
+          >
+        </div>
+      </div>
+    </div>
+  </Footer>
+<!-- Bootstrap -->
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js" integrity="sha384-fbbOQedDUMZZ5KreZpsbe1LCZPVmfTnH7ois6mU1QK+m14rQ1l2bGBq41eYeM/fS" crossorigin="anonymous"></script>
+
+</body>
+</html>
+  
+  

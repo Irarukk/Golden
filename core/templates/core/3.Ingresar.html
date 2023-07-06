@@ -1,0 +1,100 @@
+{% load static %} {% load crispy_forms_tags %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{% static '3.Ingresar.css'%}" />
+    <script
+      src="https://kit.fontawesome.com/acbdc95a40.js"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="shortcut icon" href="{% static 'images/logo.png' %}" />
+    <title>Registrar</title>
+  </head>
+  <body>
+    <header>
+      <a href="{% url 'home' %}"><i class="fa-solid fa-arrow-left"></i></a>
+    </header>
+    <div class="section">
+      <form action="" method="post">
+        <img src="{% static 'images/logo_Vertical.png' %}" alt="" />
+        <h1>¡Hola!, Completa Para Poder Ingresar</h1>
+        {% csrf_token %}
+        <div class="csrf-token">{% csrf_token %}</div>
+        <div class="form-crispy">{{ form | crispy }}</div>
+        <button type="submit">Ingresar</button>
+        <div class="crearcuenta">
+          <p>¿No Tienes Cuenta?</p>
+          &nbsp;&nbsp;&nbsp;
+          <a href="{% url 'registro' %}">Registrate</a>
+        </div>
+      </form>
+    </div>
+    <!-- !footer -->
+    <footer>
+      <div class="contacto">
+        <i class="fa-solid fa-phone-volume"></i>
+        <div class="vent">
+          <h4>Para Consultas</h4>
+          <h2>(+569)1 234 5678</h2>
+        </div>
+      </div>
+      <div class="footer">
+        <div class="grupo-1">
+          <div class="conocenos">
+            <h2>Conócenos</h2>
+            <a href="">Nuestra Empresa</a>
+            <a href="">Politicas de Privacidad</a>
+            <a href="">Término y Condiciones</a>
+            <a href="">Trabaja con Nosotros</a>
+          </div>
+          <div class="ayuda">
+            <h2>Te Ayudamos</h2>
+            <a href="">Centro de Ayuda</a>
+            <a href="">Mis Compras</a>
+            <a href="">Documentacion</a>
+          </div>
+          <div class="direccion">
+            <h2>Encuéntranos</h2>
+            <h3>Casa Matriz</h3>
+            &nbsp;&nbsp;<i class="fa-solid fa-location-dot"></i>&nbsp;<a href=""
+              >Serrano #1105, Melipilla</a
+            >
+
+            &nbsp;
+            <h3>Otras Sucursales</h3>
+            &nbsp;&nbsp;<i class="fa-solid fa-shop"></i>&nbsp;<a href=""
+              >Ver Listado</a
+            >
+          </div>
+        </div>
+
+        <div class="grupo-2">
+          <div class="lg">
+            <img src="logo/logo_horizontal.png" alt="Logo" />
+          </div>
+          <div class="siguenos">
+            <h3>Síguenos</h3>
+            <i class="fa-brands fa-facebook-f"></i>
+            <i class="fa-brands fa-twitter"></i>
+            <i class="fa-brands fa-instagram"></i>
+            <i class="fa-brands fa-youtube"></i>
+            <i class="fa-brands fa-pinterest"></i>
+          </div>
+          <div class="copy">
+            <small
+              >&copy;
+              <script>
+                var fecha = new Date();
+                var anio = fecha.getFullYear();
+                document.write(anio);
+              </script>
+              <b>GoldenGarden</b> - Todos los Derechos Reservados.</small
+            >
+          </div>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

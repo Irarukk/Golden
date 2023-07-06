@@ -1,0 +1,175 @@
+{% load static %} 
+
+<!DOCTYPE html>
+<head>
+  <title>GoldenGarden</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+  <link rel="stylesheet" href="{% static '1.Index.css'%}">
+  <link rel="stylesheet" href="{% static '4.carrito.css'%}">
+  <link rel="shortcut icon" href="{% static 'images/logo.png' %}" />
+  <script src="https://kit.fontawesome.com/acbdc95a40.js" crossorigin="anonymous"></script>
+</head>
+<body>
+  <!-- !CHeckbox para responsive -->
+  <Header>
+    <input type="checkbox" id="check" />
+      <label for="check" class="chekbtn">
+        <i class="fa fa-bars"></i>
+      </label>
+      <!-- !aqui comienza el codigo principal -->
+    <div class="sup">
+      <img class="logo" src="{% static 'images/logo_horizontal.png' %}"alt="logo">
+      <form class="search-box">
+        <input type="text" placeholder="BUSCAR ELEMENTO" >
+        <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+
+    </form>
+      <div class="sup-btn" id="user">
+        {% if user.is_authenticated %}
+          <div style="display: flex; margin: 0 100px; align-items: center;"> 
+          <span style="color: gold;margin-right: 40px; text-transform: capitalize; font-size: x-large; text-shadow: 0 0 7px black; " >{{user.username}}</span>
+          <li><a href="{% url 'logout' %}">Salir</a></li>
+        </div>
+        {% else %}
+          <li><a href="{% url 'login' %}">Ingresar</a></li>
+          <li><a href="{% url 'registro' %}">Registrar</a></li>
+        {% endif %}
+      </div>
+    </div>
+      <div class="inferior">
+        <li><i class="fa-solid fa-house"></i><a href="{% url 'home' %}">Inicio</a></li>
+        <li ><i class="fa-sharp fa-solid fa-leaf"></i><a href="{% url 'home' %}">Productos</a></li>
+        <li><i class="fa-solid fa-users"></i><a href="">Nosotros</a></li>
+        <li class="carrito"><div class="notif">1</div><i class="fa-solid fa-cart-shopping"></i></i><a href="">Mis Compras</a></li>
+        <li><i class="fa-solid fa-truck-fast"></i><a href="">Seguimiento</a></li>
+      </div>
+    <div class="cont-carrito"></div>
+  </Header>
+  <Section>
+
+    <H2 class="sub-titulo" id="productos">Carrito de Compras</H2>
+
+    <!-- !PRODUCTOS -->
+  <div class="carrito-tab" >
+
+    <!-- !carrito -->
+    <table>
+      <thead>
+        <tr>
+          
+          <th>Imagen</th>
+          <th>Codigo</th>
+          <th>Nombre</th>
+          <th>Cantidad</th>
+          <th>Precio</th>
+          <th>Subtotal</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for item in carro %}
+          <tr>
+            <td><img src="{{item.2}}" alt=""></td>
+            <td>{{item.0}}</td>
+            <td>{{item.1}}</td>
+            <td>{{item.4}}</td>
+            <td>{{item.3}}</td>
+            <td>{{item.5}}</td>
+            <td><a href="{% url 'dropitem' item.0 %}"><i class="fa-solid fa-trash"></i></a></i></td>
+          </tr>
+
+        {% endfor %}
+        
+      </tbody>
+    </table>
+ 
+    
+
+    
+    
+  </div>
+  {%if not carro%}
+  <H2 class="sub-titulo" id="mensaje"  >Tu Carrito Está Vacío</H2>
+  {% else %}
+  <div class ="comprar">
+    
+    <a class="btn" style="color:white;" href="{% url 'comprar' %}"><i class="fa-solid fa-bag-shopping"></i>&nbsp;&nbsp;Comprar</a>
+    
+  </div>
+  {% endif %}
+  </Section>
+  
+
+
+  <Footer>
+    <div class="contacto">
+      <i class="fa-solid fa-phone-volume"></i>
+      <div class="vent">
+        <h4>Para Consultas</h4>
+        <h2>(+569)1 234 5678</h2>
+      </div>
+    </div>
+    <div class="footer">
+      <div class="grupo-1">
+        <div class="conocenos">
+          <h2>Conócenos</h2>
+          <a href="">Nuestra Empresa</a>
+          <a href="">Politicas de Privacidad</a>
+          <a href="">Término y Condiciones</a>
+          <a href="">Trabaja con Nosotros</a>
+        </div>
+        <div class="ayuda"  >
+          <h2>Te Ayudamos</h2>
+          <a href="">Centro de Ayuda</a>
+          <a href="">Mis Compras</a>
+          <a href="">Documentacion</a>
+        </div>
+        <div class="direccion">
+          <h2>Encuéntranos</h2>
+          <h3>Casa Matriz</h3>
+          &nbsp;&nbsp;<i class="fa-solid fa-location-dot"></i>&nbsp;<a href=""
+            >Serrano #1105, Melipilla</a
+          >
+
+          &nbsp;
+          <h3>Otras Sucursales</h3>
+          &nbsp;&nbsp;<i class="fa-solid fa-shop"></i>&nbsp;<a href=""
+            >Ver Listado</a
+          >
+        </div>
+      </div>
+
+      <div class="grupo-2">
+        <div class="lg">
+          <img src="{% static 'images/logo_horizontal.png' %}" alt="Logo" />
+        </div>
+        <div class="siguenos">
+          <h3>Síguenos</h3>
+          <i class="fa-brands fa-facebook-f" ></i>
+          <i class="fa-brands fa-twitter"></i>
+          <i class="fa-brands fa-instagram"></i>
+          <i class="fa-brands fa-youtube"></i>
+          <i class="fa-brands fa-pinterest"></i>
+        </div>
+        <div class="copy">
+          <small
+            >&copy;
+            <script>
+              var fecha = new Date();
+              var anio = fecha.getFullYear();
+              document.write(anio);
+            </script>
+            <b>GoldenGarden</b> - Todos los Derechos Reservados.</small
+          >
+        </div>
+      </div>
+    </div>
+  </Footer>
+<!-- Bootstrap -->
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js" integrity="sha384-fbbOQedDUMZZ5KreZpsbe1LCZPVmfTnH7ois6mU1QK+m14rQ1l2bGBq41eYeM/fS" crossorigin="anonymous"></script>
+
+</body>
+</html>
+  
+  

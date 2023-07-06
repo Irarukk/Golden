@@ -1,0 +1,80 @@
+@import url("https://fonts.googleapis.com/css2?family=Acme&display=swap");
+
+* {
+  padding: 0;
+  margin: 0;
+  font-family: "Acme", sans-serif;
+  text-decoration: none !important;
+  list-style: none;
+}
+.carrito-tab{
+    width: 100%;
+    padding: 90px;
+    padding-bottom: 20px !important;
+}
+table {
+    text-align: center;
+    width: 100% !important;
+    color: white;
+    backdrop-filter: blur(3px);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.519);
+    border-radius: 20px !important;
+}
+
+thead{
+    width: 100px !important;
+    background-color: red;
+    font-weight: lighter;
+    font-size: x-large;
+    
+   
+}
+
+
+
+tbody{
+    width: 100%;
+    font-size: large;
+    text-transform: capitalize;
+    
+}
+#mensaje{
+    text-align: center;
+    margin: 0 !important;
+    
+}
+td img{
+    height: 100px;
+    margin: 20px 0;
+}
+td a{
+    color: white;
+    margin: 0 20px;
+}
+
+.btn{
+    display: flex;
+    width: 20%;
+    text-align: center;
+    justify-content: center;
+    color: white;
+    text-shadow: 0 0 3px black;
+    background-color: rgb(0, 208, 0);
+    cursor: pointer;
+    height: 50px;
+    align-items: center;
+  
+  }
+  .btn:hover{
+    border: 3px solid rgb(0, 208, 0);
+    color: rgb(0, 208, 0);
+  }
+  .comprar{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    height: 50px;
+    align-items: center;
+  }
+
+ 

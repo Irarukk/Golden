@@ -1,0 +1,25 @@
+@import url("https://fonts.googleapis.com/css2?family=Acme&display=swap");
+
+* {
+  padding: 0;
+  margin: 0;
+  font-family: "Acme", sans-serif;
+  text-decoration: none !important;
+  list-style: none;
+}
+
+
+thead{
+    width: 100px !important;
+    background-color: red;
+    font-weight: lighter;
+    font-size: x-large;
+    
+   
+}
+
+tbody{
+    width: 100%;
+    font-size: large;
+    text-transform: capitalize;
+}

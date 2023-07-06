@@ -1,0 +1,106 @@
+{% load static %} 
+
+<!DOCTYPE html>
+<head>
+  <title>GoldenGarden</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+  <link rel="stylesheet" href="{% static '1.Index.css'%}">
+  <link rel="stylesheet" href="{% static '6.perfil_cliente.css'%}">
+  <link rel="shortcut icon" href="{% static 'images/logo.png' %}" />
+  <script src="https://kit.fontawesome.com/acbdc95a40.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <h1>Estado de la Orden</h1>
+        <p>Cliente: {{ orden.cliente }}</p>
+        <p>Dirección de envío: {{ orden.direccion_envio }}</p>
+        <p>Fecha de compra: {{ orden.fecha_compra }}</p>
+        <p>Estado: {{ orden.estado }}</p>
+</body>
+    <h1>Perfil del Cliente</h1>
+        <p>Nombre: {{ cliente.user.first_name }} {{ cliente.user.last_name }}</p>
+        <p>Dirección: {{ cliente.direccion }}</p>
+        <p>Teléfono: {{ cliente.telefono }}</p>
+
+    <h2>Historial de Compras</h2>
+    <ul>
+    {% for compra in compras %}
+        <li>{{ compra.id }}</li>
+        <li>{{ compra.fecha }}</li>
+        <li>{{ compra.producto}}</li>
+        <li>{{ compra.cantidad }}</li>
+        <li>{{ compra.total }}</li>
+    {% empty %}
+        <li>No hay compras registradas.</li>
+    {% endfor %}
+    </ul>
+    <Footer>
+        <div class="contacto">
+          <i class="fa-solid fa-phone-volume"></i>
+          <div class="vent">
+            <h4>Para Consultas</h4>
+            <h2>(+569)1 234 5678</h2>
+          </div>
+        </div>
+        <div class="footer">
+          <div class="grupo-1">
+            <div class="conocenos">
+              <h2>Conócenos</h2>
+              <a href="">Nuestra Empresa</a>
+              <a href="">Politicas de Privacidad</a>
+              <a href="">Término y Condiciones</a>
+              <a href="">Trabaja con Nosotros</a>
+            </div>
+            <div class="ayuda"  >
+              <h2>Te Ayudamos</h2>
+              <a href="">Centro de Ayuda</a>
+              <a href="">Mis Compras</a>
+              <a href="">Documentacion</a>
+            </div>
+            <div class="direccion">
+              <h2>Encuéntranos</h2>
+              <h3>Casa Matriz</h3>
+              &nbsp;&nbsp;<i class="fa-solid fa-location-dot"></i>&nbsp;<a href=""
+                >Serrano #1105, Melipilla</a
+              >
+    
+              &nbsp;
+              <h3>Otras Sucursales</h3>
+              &nbsp;&nbsp;<i class="fa-solid fa-shop"></i>&nbsp;<a href=""
+                >Ver Listado</a
+              >
+            </div>
+          </div>
+    
+          <div class="grupo-2">
+            <div class="lg">
+              <img src="{% static 'images/logo_horizontal.png' %}" alt="Logo" />
+            </div>
+            <div class="siguenos">
+              <h3>Síguenos</h3>
+              <i class="fa-brands fa-facebook-f" ></i>
+              <i class="fa-brands fa-twitter"></i>
+              <i class="fa-brands fa-instagram"></i>
+              <i class="fa-brands fa-youtube"></i>
+              <i class="fa-brands fa-pinterest"></i>
+            </div>
+            <div class="copy">
+              <small
+                >&copy;
+                <script>
+                  var fecha = new Date();
+                  var anio = fecha.getFullYear();
+                  document.write(anio);
+                </script>
+                <b>GoldenGarden</b> - Todos los Derechos Reservados.</small
+              >
+            </div>
+          </div>
+        </div>
+      </Footer>
+    <!-- Bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js" integrity="sha384-fbbOQedDUMZZ5KreZpsbe1LCZPVmfTnH7ois6mU1QK+m14rQ1l2bGBq41eYeM/fS" crossorigin="anonymous"></script>
+    
+    </body>
+    </html>
+      
